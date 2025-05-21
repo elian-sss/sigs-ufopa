@@ -1,0 +1,9 @@
+package sigs.ufopa.backend.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import sigs.ufopa.backend.entities.Role;
+
+@Repository
+public interface RoleRepository extends JpaRepository<Role, Long> {
+}

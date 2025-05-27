@@ -46,43 +46,43 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = store.getters['auth/isAuthenticated'];
-  const userRole = store.getters['auth/userRole'];
-
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!isAuthenticated) {
-      next({ name: 'Login', query: { redirect: to.fullPath } }); // Salva a rota que o usuário tentou acessar
-    } else {
-      const requiredRoles = to.meta.roles;
-      if (requiredRoles && !requiredRoles.includes(userRole)) {
-        // O usuário está logado, mas não tem o papel necessário
-        // Redirecionar para uma página de "acesso negado" ou para a home do seu papel
-        alert('Acesso Negado!'); // Simplista
-        // Poderia ser next({ name: 'PaginaDeErroAcesso' }) ou next(from) ou next('/')
-        // Ou redirecionar para a página principal do usuário
-        if (userRole === 'admin') next({ name: 'Admin' });
-        else if (userRole === 'agente_seguranca') next({ name: 'AgenteSeguranca' });
-        else if (userRole === 'usuario') next({ name: 'Usuario' });
-        else next({ name: 'Login' }); // Fallback
-      } else {
-        next(); // Prossiga
-      }
-    }
-  } else if (to.matched.some(record => record.meta.requiresGuest)) {
-    if (isAuthenticated) {
-      // Se a rota requer convidado (ex: login) e o usuário está logado, redireciona
-      if (userRole === 'admin') next({ name: 'Admin' });
-      else if (userRole === 'agente_seguranca') next({ name: 'AgenteSeguranca' });
-      else if (userRole === 'usuario') next({ name: 'Usuario' });
-      else next('/'); // Fallback
-    } else {
-      next();
-    }
-  }
-  else {
-    next(); // Rotas públicas
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = store.getters['auth/isAuthenticated'];
+//   const userRole = store.getters['auth/userRole'];
+//
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if (!isAuthenticated) {
+//       next({ name: 'Login', query: { redirect: to.fullPath } }); // Salva a rota que o usuário tentou acessar
+//     } else {
+//       const requiredRoles = to.meta.roles;
+//       if (requiredRoles && !requiredRoles.includes(userRole)) {
+//         // O usuário está logado, mas não tem o papel necessário
+//         // Redirecionar para uma página de "acesso negado" ou para a home do seu papel
+//         alert('Acesso Negado!'); // Simplista
+//         // Poderia ser next({ name: 'PaginaDeErroAcesso' }) ou next(from) ou next('/')
+//         // Ou redirecionar para a página principal do usuário
+//         if (userRole === 'admin') next({ name: 'Admin' });
+//         else if (userRole === 'agente_seguranca') next({ name: 'AgenteSeguranca' });
+//         else if (userRole === 'usuario') next({ name: 'Usuario' });
+//         else next({ name: 'Login' }); // Fallback
+//       } else {
+//         next(); // Prossiga
+//       }
+//     }
+//   } else if (to.matched.some(record => record.meta.requiresGuest)) {
+//     if (isAuthenticated) {
+//       // Se a rota requer convidado (ex: login) e o usuário está logado, redireciona
+//       if (userRole === 'admin') next({ name: 'Admin' });
+//       else if (userRole === 'agente_seguranca') next({ name: 'AgenteSeguranca' });
+//       else if (userRole === 'usuario') next({ name: 'Usuario' });
+//       else next('/'); // Fallback
+//     } else {
+//       next();
+//     }
+//   }
+//   else {
+//     next(); // Rotas públicas
+//   }
+// });
 
 export default router;

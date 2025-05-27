@@ -45,7 +45,7 @@ export default {
 
   logout() {
     // Na prática, você pode querer invalidar o token no backend também
-    localStorage.removeItem('user');
+    localStorage.removeItem('role');
     localStorage.removeItem('token');
     console.log("Usuário deslogado");
   },

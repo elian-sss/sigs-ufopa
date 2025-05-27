@@ -39,12 +39,12 @@ const handleLogin = async () => {
   errorMessage.value = '';
   try {
     const data = await login(email.value, password.value);
-    console.log(data)
-    localStorage.setItem('token', data.accessToken);
-    const decoded = jwt_decode(data.accessToken);
-    console.log(decoded)
+    localStorage.setItem('token', data.accesToken);
+    const decoded = jwt_decode(data.accesToken);
+    const role = decoded.scope || decoded["scope"]?.[0] || "usuario";
+    localStorage.setItem('role', role);
 
-    const redirectPath = route.query.redirect || getDefaultPathForRole(data.role);
+    const redirectPath = route.query.redirect || getDefaultPathForRole(role);
     router.push(redirectPath);
   } catch (error) {
     errorMessage.value = error?.response?.data?.message || error.message || 'Falha ao tentar fazer login. Verifique suas credenciais.';

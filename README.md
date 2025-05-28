@@ -100,7 +100,7 @@ Responsável pela configuração das rotas e pelo controle de acesso a cada pág
 
 ---
 
-#### 2. `src/api/index.js` (ou similar)
+#### 2. `src/utils/axios.js`
 
 Centraliza a configuração do cliente HTTP da aplicação, utilizando **Axios**.
 
@@ -115,7 +115,7 @@ Centraliza a configuração do cliente HTTP da aplicação, utilizando **Axios**
 
 ---
 
-#### 3. `src/services/auth.js` (ou similar)
+#### 3. `src/api/auth.js`
 
 Implementa as funções responsáveis pela autenticação do usuário.
 

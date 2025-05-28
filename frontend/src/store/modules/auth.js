@@ -24,6 +24,9 @@ const actions = {
         case 'admin':
           router.push('/admin');
           break;
+        case 'coordenador':
+          router.push('/coordenador');
+          break;
         case 'agente_seguranca': // Certifique-se que o nome do papel é consistente
           router.push('/agente-seguranca');
           break;
@@ -31,12 +34,11 @@ const actions = {
           router.push('/usuario');
           break;
         default:
-          router.push('/login'); // Ou uma página padrão
+          router.push('/login'); 
       }
       return true;
     } catch (error) {
       console.error("Falha no login:", error);
-      // Aqui você pode commitar uma mutação para um estado de erro, se desejar
       throw error; // Propagar o erro para o componente de login tratar
     }
   },
@@ -45,15 +47,6 @@ const actions = {
     commit('CLEAR_AUTH_DATA');
     router.push('/login');
   },
-  // Ação para verificar se o usuário ainda está autenticado ao carregar a app (opcional)
-  // checkAuth({ commit, state }) {
-  //   if (state.token && state.user) {
-  //     // Adicionar lógica para validar o token com o backend se necessário
-  //     console.log('Usuário já autenticado:', state.user.role);
-  //   } else {
-  //     commit('CLEAR_AUTH_DATA');
-  //   }
-  // }
 };
 
 const mutations = {
@@ -74,7 +67,7 @@ const mutations = {
 };
 
 export default {
-  namespaced: true, // importante para módulos
+  namespaced: true,
   state,
   getters,
   actions,

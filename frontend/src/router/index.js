@@ -7,6 +7,7 @@ import LoginView from '../views/LoginView.vue';
 import UsuarioView from '../views/UsuarioView.vue';
 import AgenteSegurancaView from '../views/AgenteSegurancaView.vue';
 import AdminView from '../views/AdminView.vue';
+import CoordenadorView from '../views/CoordenadorView.vue';
 
 const routes = [
   {
@@ -14,6 +15,12 @@ const routes = [
     name: 'Login',
     component: LoginView,
     meta: { requiresGuest: true } // Para redirecionar se já estiver logado
+  },
+  {
+    path: '/coordenador',
+    name: 'Coordenador',
+    component: CoordenadorView,
+    meta: { requiresAuth: true, roles: ['coordenador', 'admin'] }
   },
   {
     path: '/usuario',
